@@ -1,27 +1,26 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
-project(Simulation)
+cmake_minimum_required(VERSION 3.5)
+project(MyProject)
 
-# Find Geant4 package, including UI and visualization drivers
+# Find Geant4 package, activating all available UI and Vis drivers by default
 find_package(Geant4 REQUIRED ui_all vis_all)
-
-# Include Geant4 settings
-include(${Geant4_USE_FILE})
 
 # Find ROOT package
 find_package(ROOT REQUIRED)
 
-# Include directories
-include_directories(${PROJECT_SOURCE_DIR})
-
-# Collect source and header files
-file(GLOB sources ${PROJECT_SOURCE_DIR}/*.cc)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/*.hh)
+# Setup include directories for Geant4 and ROOT
+include(${Geant4_USE_FILE})
+include_directories(${ROOT_INCLUDE_DIRS})
 
 # Add executable
-add_executable(main main.cc ${sources} ${headers})
+add_executable(main main.cc MyRunAction.cc MySensitiveDetector.cc MyHit.cc MyDetectorConstruction.cc MyPrimaryGeneratorAction.cc)
 
 # Link against Geant4 and ROOT libraries
 target_link_libraries(main ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
-# Add custom target
-add_custom_target(Simulation DEPENDS main)
+
+
+
+
+
+
+
