@@ -1,40 +1,24 @@
-/*#ifndef MYSENSITIVEDETECTOR_HH
-#define MYSENSITIVEDETECTOR_HH
-
-#include "G4VSensitiveDetector.hh"
-#include "globals.hh"
-
-class MySensitiveDetector : public G4VSensitiveDetector {
-public:
-    MySensitiveDetector(const G4String& name);
-    virtual ~MySensitiveDetector();
-
-    virtual G4bool ProcessHits(G4Step*, G4TouchableHistory*);
-};
-
-#endif
-*/
-
 #ifndef MYSENSITIVEDETECTOR_HH
 #define MYSENSITIVEDETECTOR_HH
 
 #include "G4VSensitiveDetector.hh"
-#include "G4THitsCollection.hh"
-#include "G4Step.hh"
-#include "G4HCofThisEvent.hh"
-#include "MyHit.hh"
+#include "globals.hh"
+#include <map>
 
 class MySensitiveDetector : public G4VSensitiveDetector {
 public:
-    MySensitiveDetector(const G4String& name);
+    MySensitiveDetector(const G4String& name, const G4String& hitsCollectionName);
     virtual ~MySensitiveDetector();
 
-    virtual void Initialize(G4HCofThisEvent* hce) override; // Declare the Initialize method
-    virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* history) override;
-    virtual void EndOfEvent(G4HCofThisEvent* hce) override;
+    virtual void Initialize(G4HCofThisEvent*) override;
+    virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory*) override;
+    virtual void EndOfEvent(G4HCofThisEvent*) override;
 
 private:
-    G4THitsCollection<MyHit>* fHitsCollection;
+    G4double fTotalEnergyDep;  // Total energy deposition across all volumes
+    std::map<G4String, G4double> fEnergyDepMap;  // Energy deposition for each volume
 };
 
 #endif
+
+
