@@ -1,1 +1,1 @@
-# Chroma.Calo---Geant4
+I have been working on making a scintillator detector. It is made of 5 volumes made of GAGG( gadolinium aluminum gallium garnet ), PWO(lead tungstate ), BGO(bismuth germanate), PWO( lead tungstate ). LYSO( lutetium yttrium oxy orthosilicate ) respectively. It simulates electron interactions with these materials. It gives graph for energy deposition in respective volumes using root module.
