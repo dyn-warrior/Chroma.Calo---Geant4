@@ -3,6 +3,7 @@
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4Event.hh"
 
 MyPrimaryGeneratorAction::MyPrimaryGeneratorAction() {
     G4int n_particle = 1;
@@ -12,7 +13,7 @@ MyPrimaryGeneratorAction::MyPrimaryGeneratorAction() {
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     fParticleGun->SetParticleDefinition(particle);
-    fParticleGun->SetParticleEnergy(10.0 * GeV);
+    fParticleGun->SetParticleEnergy(10 * GeV);
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
     fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0. * cm));
 }
@@ -24,3 +25,5 @@ MyPrimaryGeneratorAction::~MyPrimaryGeneratorAction() {
 void MyPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }
+
+
