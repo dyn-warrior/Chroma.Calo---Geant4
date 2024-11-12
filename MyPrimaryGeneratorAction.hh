@@ -10,10 +10,12 @@ public:
     MyPrimaryGeneratorAction();
     virtual ~MyPrimaryGeneratorAction();
 
-    virtual void GeneratePrimaries(G4Event*);
+    virtual void GeneratePrimaries(G4Event* anEvent);
 
 private:
     G4ParticleGun* fParticleGun;
 };
 
 #endif
+
+
